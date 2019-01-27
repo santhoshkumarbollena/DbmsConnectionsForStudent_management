@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html ng-app="myModule" ng-controller="myController">
+<head>
+<meta charset="ISO-8859-1">
+<title>Student Details</title>
+        <script src="angular.js"></script>
+         <script type="text/javascript">
+		var app=angular.module("myModule",[]);
+		
+		app.controller("myController",['$scope','$http','$window',function($scope,$http,$window){
+			
+			var Student={
+			        "id":0,
+			        "name":"",
+			        "age":0,
+			        "country":""
+			};
+			//$window.alert(Student.Id+"Initial");
+			
+			$scope.Student=Student;
+			$scope.students=[];
+			$scope.GetAllStudentDetails=function(id){
+				//var id=Student.Id;
+				//$window.alert(Student.Id);
+				
+	    		$http({
+	    			method :'GET',
+	    			url : 'http://localhost:8884/getAllStudents',
+	    			
+	    		}).then(function (response)
+	    				{
+	    			$scope.students=response.data;
+	    			
+	    				});
+	    	}
+			
+			$scope.GettingStudentDetails=function(id){
+				//var id=Student.Id;
+				//$window.alert(Student.Id);
+				
+	    		$http({
+	    			method :'GET',
+	    			url : 'http://localhost:8884/getStudentById/'+id,
+	    			
+	    		}).then(function (response)
+	    				{
+	    			$scope.Student=response.data;
+	    /* 			$scope.Student.Id=response.data.id;
+	    			$scope.Student.Name=response.data.name;
+	    			$scope.Student.Age=response.data.age;
+	    			$scope.Student.Country=response.data.country;
+	    			$window.alert("hi "+Student.Id+"  name="+response.data.id); */
+	    				});
+	    	}
+			
+			$scope.AddStudentDetails=function(){
+	    		$http({
+	    			method :'POST',
+	    			url : 'http://localhost:8884/AddStudent',
+	    			data : angular.toJson($scope.Student),
+	    			headers:{'Content-Type':'application/json'}
+	    		}).then();
+	    		
+	    	}
+			
+			$scope.DeletingStudentDetails=function(StudentId)
+			{
+				var id=StudentId;
+				$http({
+					method:'DELETE',
+					url:'http://localhost:8884/deletingStudent/'+id,
+				}).then(function(response){
+					
+				})
+				;
+			}
+			
+			$scope.UpdateStudentDetails=function(StudentId){
+				
+	    		$http({
+	    			method :'PUT',
+	    			url : 'http://localhost:8884/UpdateStudent/'+StudentId,
+	    			data : angular.toJson($scope.Student),
+	    			headers:{'Content-Type':'application/json'}
+	    		}).then();
+	    		
+	    	}
+	}]);
+
+</script>
+        
+</head>
+<body>
+	<form >
+	<i>Enter Id</i><input type="number" Id="Id"  ng-model="Student.id" >
+	<input type="button" value="Find Student" ng-click="GettingStudentDetails(Student.id)">
+	<input type="button" value="Delete Student" ng-click="DeletingStudentDetails(Student.id)">
+	</form>
+	<table>
+	<tr>
+	<td>Student Id:</td>
+	<td><input type="number" Id="Id" ng-model="Student.id"></td>
+	</tr>
+	<tr>
+	<td>Student Name:</td>
+	<td><input type="text" Id="Name" ng-model="Student.name"></td>
+	</tr>
+	<tr>
+	<td>Student Age:</td>
+	<td><input type="number" Id="Age" ng-model="Student.age"></td>
+	</tr>
+	<tr>
+	<td>Student Country:</td>
+	<td><input type="text" Id="Country" ng-model="Student.country"></td>
+	</tr>
+	<tr>
+	<td><input type="button" value="Add Student" ng-click="AddStudentDetails()"></td>
+	<td><input type="button" value="Update Student" ng-click="UpdateStudentDetails(Student.id)"></td>
+	</tr>
+	</table>
+	<table border="1">
+	<tr>
+	<th>Student Id</th>
+	<th>Student Name</th>
+	<th>Student Age</th>
+	<th>Student Country</th>
+	</tr>
+	<tr ng-repeat="stud in students">
+	<td>{{stud.id}}</td>
+	<td>{{stud.name}}</td>
+	<td>{{stud.age}}</td>
+	<td>{{stud.country}}</td>
+	</tr>
+	<tr>
+	<td><input type="button" value="Get All Students" ng-click="GetAllStudentDetails()"></td>
+	</tr>
+	</table>
+	
+</body>
+</html>
