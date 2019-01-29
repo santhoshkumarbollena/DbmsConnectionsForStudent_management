@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
-
+ 
 @Entity
 @Table(name = "student")
 public class Student {

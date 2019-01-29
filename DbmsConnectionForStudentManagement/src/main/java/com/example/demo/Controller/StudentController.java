@@ -56,7 +56,6 @@ public class StudentController {
 		str.save(p1);
 		//Send mail from here
 		
-		 
 		try {
 		SimpleMailMessage mail=new SimpleMailMessage();
 		mail.setTo(p1.getEmail());
