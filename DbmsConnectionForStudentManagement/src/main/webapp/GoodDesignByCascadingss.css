@@ -1,0 +1,34 @@
+@charset "UTF-8";
+.Button {
+	height: 40px;
+	width: 100px;
+	background: #173139;
+	color: #ffffff;
+	font-weight: bold;
+}
+.Button:HOVER {
+	background: #040a0b;
+	border: 1px solid #777;
+}
+.Header {
+	width: 100%;
+	background: white;
+	margin: 0 auto 0 auto;
+	height: 100%;
+}
+.heading {
+	height: 75px;
+	background: #173139;
+	padding: 10px;
+	text-align: center;
+	color: white;
+}
+.footer {
+	align-self:flex-end;
+	background: #173139;
+	height: 20%;
+	width: 100%;
+	color: #ffffff;
+	text-align: center;
+	bottom: 0;
+}

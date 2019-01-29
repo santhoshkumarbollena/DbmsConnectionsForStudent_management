@@ -3,6 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Student Details</title>
+<link rel="stylesheet" type="text/css" href="GoodDesignByCascadingss.css">
         <script src="angular.js"></script>
          <script type="text/javascript">
 		var app=angular.module("myModule",[]);
@@ -46,6 +47,9 @@
 	    		}).then(function (response)
 	    				{
 	    			$scope.Student=response.data;
+	    			if(response.data.id==0){
+	    				$window.alert("Student with that id doesn't exist");
+	    			}
 	    /* 			$scope.Student.Id=response.data.id;
 	    			$scope.Student.Name=response.data.name;
 	    			$scope.Student.Age=response.data.age;
@@ -60,7 +64,13 @@
 	    			url : 'http://localhost:8884/AddStudent',
 	    			data : angular.toJson($scope.Student),
 	    			headers:{'Content-Type':'application/json'}
-	    		}).then();
+	    		}).then(function (response)
+	    				{
+	    			//$scope.Student=response.data;
+	    			$window.alert("Student Added succesfully"); 
+	    				}
+	    				
+	    		);
 	    		
 	    	}
 			
@@ -71,9 +81,11 @@
 					method:'DELETE',
 					url:'http://localhost:8884/deletingStudent/'+id,
 				}).then(function(response){
-					
+					$window.alert("Student updated succesfully"); 
+					Student.id=0;Student.name="";Student.age=0;Student.country="";Student.email="";
 				})
 				;
+				
 			}
 			
 			$scope.UpdateStudentDetails=function(StudentId){
@@ -92,10 +104,19 @@
         
 </head>
 <body>
+
+ <div class="Header" >
+       <div >
+			<header ng-include="'Header.html'"></header>
+	</div>
 	<form >
-	<i>Enter Id</i><input type="number" Id="Id"  ng-model="Student.id" >
-	<input type="button" value="Find Student" ng-click="GettingStudentDetails(Student.id)">
-	<input type="button" value="Delete Student" ng-click="DeletingStudentDetails(Student.id)">
+	<table>
+	<tr>
+	<td><i>Enter Id:</i></td><td><input type="number" Id="Id"  ng-model="Student.id" ></td>
+	<td><input type="button" value="Find Student" class="Button" ng-click="GettingStudentDetails(Student.id)"></td>
+	<td><input type="button" value="Delete Student" class="Button" ng-click="DeletingStudentDetails(Student.id)"></td>
+	</tr>
+	</table>
 	</form>
 	<table>
 	<tr>
@@ -118,8 +139,8 @@
 	<td>Student Email:</td>
 	<td><input type="text" Id="Email" ng-model="Student.email"></td></tr>
 	<tr>
-	<td><input type="button" value="Add Student" ng-click="AddStudentDetails()"></td>
-	<td><input type="button" value="Update Student" ng-click="UpdateStudentDetails(Student.id)"></td>
+	<td><input type="button" value="Add Student" class="Button" ng-click="AddStudentDetails()"></td>
+	<td><input type="button" value="Update Student" class="Button" ng-click="UpdateStudentDetails(Student.id)"></td>
 	</tr>
 	</table>
 	<table border="1">
@@ -138,9 +159,12 @@
 	<td>{{stud.email}}</td>
 	</tr>
 	<tr>
-	<td><input type="button" value="Get All Students" ng-click="GetAllStudentDetails()"></td>
+	<td><input type="button" value="Get All Students" class="Button" ng-click="GetAllStudentDetails()"></td>
 	</tr>
 	</table>
-	
+	<footer ng-include="'Footer.html'"></footer>
+    	</div>
+    
+    </body>
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 import javax.websocket.server.PathParam;
 
@@ -55,13 +56,16 @@ public class StudentController {
 		
 		str.save(p1);
 		//Send mail from here
-		
+	
 		try {
+//			Properties prop=new Properties();
+//			prop.put("mail.smtp.host","smtp.gmail.com");
+//			prop.put("mail.smtp.starttls.enable", "true");
 		SimpleMailMessage mail=new SimpleMailMessage();
 		mail.setTo(p1.getEmail());
 		mail.setFrom("santhoshbollena@gmail.com");
 		mail.setSubject("Registration Notification");
-		mail.setText("You have been registered to our student management Portal ,Tank you");
+		mail.setText("You have been registered to our student management Portal     Name ="+p1.getName()+"  Age ="+p1.getAge()+"  Country ="+p1.getCountry()+" , thank you");
 		jms.send(mail);
 		
 		}catch(Exception ex) {
