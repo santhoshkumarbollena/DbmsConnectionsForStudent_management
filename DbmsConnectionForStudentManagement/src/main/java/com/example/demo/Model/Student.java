@@ -21,6 +21,14 @@ public class Student {
 	int Age;
 	@Column(name="country")
 	String Country;
+	@Column(name="email")
+	String Email;
+	public String getEmail() {
+		return Email;
+	}
+	public void setEmail(String email) {
+		Email = email;
+	}
 	public int getId() {
 		return Id;
 	}

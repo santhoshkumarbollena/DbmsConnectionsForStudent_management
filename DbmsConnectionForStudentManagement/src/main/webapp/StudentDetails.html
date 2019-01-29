@@ -13,7 +13,8 @@
 			        "id":0,
 			        "name":"",
 			        "age":0,
-			        "country":""
+			        "country":"",
+			        "email":""
 			};
 			//$window.alert(Student.Id+"Initial");
 			
@@ -114,6 +115,9 @@
 	<td><input type="text" Id="Country" ng-model="Student.country"></td>
 	</tr>
 	<tr>
+	<td>Student Email:</td>
+	<td><input type="text" Id="Email" ng-model="Student.email"></td></tr>
+	<tr>
 	<td><input type="button" value="Add Student" ng-click="AddStudentDetails()"></td>
 	<td><input type="button" value="Update Student" ng-click="UpdateStudentDetails(Student.id)"></td>
 	</tr>
@@ -124,12 +128,14 @@
 	<th>Student Name</th>
 	<th>Student Age</th>
 	<th>Student Country</th>
+	<th>Student Email</th>
 	</tr>
 	<tr ng-repeat="stud in students">
 	<td>{{stud.id}}</td>
 	<td>{{stud.name}}</td>
 	<td>{{stud.age}}</td>
 	<td>{{stud.country}}</td>
+	<td>{{stud.email}}</td>
 	</tr>
 	<tr>
 	<td><input type="button" value="Get All Students" ng-click="GetAllStudentDetails()"></td>

@@ -8,6 +8,8 @@ import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,11 +43,32 @@ public class StudentController {
 		//System.out.println(std.getName());
 		return std;
 	}
+	 JavaMailSender jms;
+	@Autowired
+	 public StudentController(JavaMailSender jms) {
+		 this.jms=jms;
+	 }
 	
 	@PostMapping("/AddStudent")
 	public Student AddingStudent(@RequestBody Student p1) {
-		//System.out.println(p1.getId());
+		System.out.println(p1.getEmail());
+		
 		str.save(p1);
+		//Send mail from here
+		
+		 
+		try {
+		SimpleMailMessage mail=new SimpleMailMessage();
+		mail.setTo(p1.getEmail());
+		mail.setFrom("santhoshbollena@gmail.com");
+		mail.setSubject("Registration Notification");
+		mail.setText("You have been registered to our student management Portal ,Tank you");
+		jms.send(mail);
+		
+		}catch(Exception ex) {
+			System.out.println("exception "+ex);
+		}
+		System.out.println("email");
 		return p1;
 	}
 	
