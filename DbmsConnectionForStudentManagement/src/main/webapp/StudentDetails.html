@@ -81,7 +81,7 @@
 					method:'DELETE',
 					url:'http://localhost:8884/deletingStudent/'+id,
 				}).then(function(response){
-					$window.alert("Student updated succesfully"); 
+					$window.alert("Student Deleted succesfully"); 
 					Student.id=0;Student.name="";Student.age=0;Student.country="";Student.email="";
 				})
 				;
@@ -120,8 +120,8 @@
 	</form>
 	<table>
 	<tr>
-	<td>Student Id:</td>
-	<td><input type="number" Id="Id" ng-model="Student.id"></td>
+	<!-- <td>Student Id:</td>
+	<td><input type="number" Id="Id" ng-model="Student.id"></td> -->
 	</tr>
 	<tr>
 	<td>Student Name:</td>
